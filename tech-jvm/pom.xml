@@ -6,7 +6,7 @@
     <artifactId>tech-jvm</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>tech-jvm</name>
-    <description>Demo project for JVM</description>
+    <description>JVM TECH</description>
 
     <properties>
         <java.version>1.8</java.version>
