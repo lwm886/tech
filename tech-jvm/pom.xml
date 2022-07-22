@@ -4,7 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.tech</groupId>
     <artifactId>tech-jvm</artifactId>
+    <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
+    <modules>
+        <module>jvm-full-gc</module>
+        <module>jvm-full-gc</module>
+    </modules>
     <name>tech-jvm</name>
     <description>JVM TECH</description>
 
