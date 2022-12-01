@@ -7,6 +7,7 @@
   <groupId>com.tech</groupId>
   <artifactId>tech</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+
+    <packaging>pom</packaging>
 
 </project>
