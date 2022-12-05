@@ -5,9 +5,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 一个线程发生OOM，仅由这个线程持有的对象会因为这个线程终结变为没有被任何线程引用，则在下次GC时这些对象占用空间会被释放掉
- * B线程OOM后，A线程继续执行
- * B线程OOM后，在GC时会释放掉之前由B线程持有的list占用的空间
+ * 一个线程在出现OOM后，这个线程会立刻被终结，线程栈空间也会被释放，其他线程可以继续执行，仅由这个线程持有的对象占用的堆空间会
+ * 在下次GC时释放掉
  * -Xms300M -Xmx300M
  * @author lw
  * @since 2022/12/5
