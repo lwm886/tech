@@ -35,14 +35,20 @@ public class SortAction extends RecursiveAction {
         SortAction rightAction = new SortAction(threshold, rightArray);
 
         //fork添加新的任务到任务队列
+        log.info(">>>>>>>>...fork task : left={} \n right={} \n origin={}",Arrays.toString(leftArray), Arrays.toString(rightArray));
+//        log.info(">>>>>>>>...fork task : left={} \n right={} \n origin={}",Arrays.toString(leftArray), Arrays.toString(rightArray),Arrays.toString(arr));
         leftAction.fork();
         rightAction.fork();
-        //执行任务(如果任务被其他线程窃取则若还未执行则帮助其执行完成)，并返回结果
+        log.info(">>>>>>>>fork task ok : left={} \n right={} \n origin={}",Arrays.toString(leftArray), Arrays.toString(rightArray));
+//        log.info(">>>>>>>>fork task ok : left={} \n right={} \n origin={}",Arrays.toString(leftArray), Arrays.toString(rightArray),Arrays.toString(arr));
+
+        //获取任务结果，如果无法获取（依赖别的任务），窃取别的任务执行
         leftAction.join();
         rightAction.join();
 
         arr = ArrayUtils.merge(leftAction.getSortedArray(), rightAction.getSortedArray());
-        log.info("merge array : left={} \n right={} \n rs={}",Arrays.toString(leftArray), Arrays.toString(rightArray),Arrays.toString(arr));
+        log.info("-----------------merge array : left={} \n right={} \n rs={}",Arrays.toString(leftArray), Arrays.toString(rightArray));
+//        log.info("-----------------merge array : left={} \n right={} \n rs={}",Arrays.toString(leftArray), Arrays.toString(rightArray),Arrays.toString(arr));
     }
 
     public int[] getSortedArray(){

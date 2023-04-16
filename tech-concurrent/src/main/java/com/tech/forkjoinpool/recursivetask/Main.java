@@ -15,10 +15,13 @@ public class Main {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         int[] arr=getArray();
         SumTask sumTask = new SumTask(0, arr.length, arr);
-        ForkJoinPool fjp = new ForkJoinPool(NCPU);
+        ForkJoinPool fjp = new ForkJoinPool();
         long begin=System.currentTimeMillis();
-        ForkJoinTask<Long> submit = fjp.submit(sumTask);
-        System.out.println(submit.get()+" fjp time="+(System.currentTimeMillis()-begin));
+        //submit返回future，通过future.get获取结果
+//        ForkJoinTask<Long> submit = fjp.submit(sumTask);
+        Long invoke = fjp.invoke(sumTask);
+        System.out.println(invoke+" fjp time="+(System.currentTimeMillis()-begin));
+        System.out.println("窃取任务数："+fjp.getStealCount());
         long begin1=System.currentTimeMillis();
         long total = total(arr);
         System.out.println(total+" single time="+(System.currentTimeMillis()-begin1));

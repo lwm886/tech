@@ -16,7 +16,7 @@ import java.util.concurrent.RecursiveTask;
  */
 public class SumTask extends RecursiveTask<Long> {
 
-    static final int SEQUENTIAL_THRESHOLD = 10000000;
+    static final int SEQUENTIAL_THRESHOLD = 100;
 
     int low;
     int high;
