@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         int[] arr=getArray();
         SumTask sumTask = new SumTask(0, arr.length, arr);
-        ForkJoinPool fjp = new ForkJoinPool();
+        ForkJoinPool fjp = new ForkJoinPool(NCPU);
         long begin=System.currentTimeMillis();
         //submit返回future，通过future.get获取结果
 //        ForkJoinTask<Long> submit = fjp.submit(sumTask);
