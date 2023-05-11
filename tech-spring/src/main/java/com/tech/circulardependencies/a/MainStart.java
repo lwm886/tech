@@ -1,15 +1,12 @@
 package com.tech.circulardependencies.a;
 
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 
-import javax.print.attribute.standard.MediaSize;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -79,7 +76,6 @@ public class MainStart {
 
         //创建动态代理 （耦合、BeanPostProcessor） Spring还是希望正常的Bean还是再初始化后创建
         //只在循环依赖的情况下在实例化后创建Proxy  判断当前是不是循环依赖
-//        singletonFactories.put(beanName,()->new JdkProxyBeanPostProcessor().getEarlyBeanReference(earlySingletonObjects.get(beanName),beanName));
         singletonFactories.put(beanName, () -> new JdkProxyBeanPostProcessor().getEarlyBeanReference(earlySingletonObjects.get(beanName), beanName));
 
         //添加到二级缓存
@@ -89,10 +85,11 @@ public class MainStart {
         Field[] declaredFields = beanClass.getDeclaredFields();
         for(Field field:declaredFields){
             Annotation annotation = field.getAnnotation(Autowired.class);
+            //说明属性上有Autowired
             if(annotation!=null){
                 field.setAccessible(true);
                 String name = field.getName();
-                Object fieldObject = getBean(name);
+                Object fieldObject = getBean(name); //拿到B得到Bean
                 field.set(instanceBean,fieldObject);
             }
         }
@@ -114,20 +111,23 @@ public class MainStart {
     }
 
     private static Object getSingleton(String beanName) {
+        //先从一级缓存拿
         Object bean = singletonObjects.get(beanName);
+
         //说明是循环依赖
         if (bean == null && singletonsCurrenlyInCreation.contains(beanName)) {
             bean = earlySingletonObjects.get(beanName);
-        }
-        //如果二级缓存没有就从三级缓存拿
-        if (bean == null) {
-            //从三级缓存中拿
-            ObjectFactory factory = singletonFactories.get(beanName);
-            if(factory!=null){
-                bean = factory.getObject(); //拿到动态代理
-                earlySingletonObjects.put(beanName,bean);
+            //如果二级缓存没有就从三级缓存拿
+            if (bean == null) {
+                //从三级缓存中拿
+                ObjectFactory factory = singletonFactories.get(beanName);
+                if(factory!=null){
+                    bean = factory.getObject(); //拿到动态代理
+                    earlySingletonObjects.put(beanName,bean);
+                }
             }
         }
+
         return bean;
     }
 
