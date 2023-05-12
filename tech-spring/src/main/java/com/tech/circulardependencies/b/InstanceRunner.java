@@ -25,6 +25,8 @@ public class InstanceRunner {
 //        InstanceB instanceB = applicationContext.getBean(InstanceB.class);
 //        System.out.println(instanceB);
 
-
+//        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(InstanceConfig.class);
+//        InstanceC instanceC = applicationContext.getBean(InstanceC.class);
+//        System.out.println(instanceC);
     }
 }
