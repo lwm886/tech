@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
  * @author lw
  * @since 2023-05-11
  */
-//@Component
+@Component
 public class InstanceC {
 }
