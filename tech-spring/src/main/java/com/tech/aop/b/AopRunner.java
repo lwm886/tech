@@ -1,4 +1,4 @@
-package com.tech.aop.a;
+package com.tech.aop.b;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -9,12 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class AopRunner {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(AopConfig.class);
-        Calculate bean =applicationContext.getBean("calculateImpl",Calculate.class);
-        int add = bean.add(1, 5);
-        System.out.println(add);
-
-        ImportCalculate bean1 = applicationContext.getBean("calculateImpl",ImportCalculate.class);
-        System.out.println(bean1.sum(11,55));
-
+        Calculate calculateProxy = applicationContext.getBean("calculateProxy", Calculate.class);
+        System.out.println(calculateProxy.add(1,5));
     }
 }
