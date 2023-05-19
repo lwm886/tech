@@ -18,12 +18,16 @@ public class CalculateAspect {
     //value 动态实现的类
     //defaultImpl 引入接口的默认实现
     //注解标记的属性 因为的接口
-    @DeclareParents(value = "com.tech.aop.a.CalculateImpl",
-            defaultImpl = ImportCalculateImpl.class)
-    public static ImportCalculate importCalculate;
+//    @DeclareParents(value = "com.tech.aop.a.CalculateImpl",
+//            defaultImpl = ImportCalculateImpl.class)
+//    public static ImportCalculate importCalculate;
 
     @Pointcut("execution(* com.tech.aop.a.Calculate.*(..))")
     public void pointCut() {
+    }
+
+    public void test1(){
+        System.out.println(1);
     }
 
     @Before(value = "pointCut()")
