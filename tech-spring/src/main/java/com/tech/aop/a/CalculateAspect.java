@@ -30,12 +30,6 @@ public class CalculateAspect {
         System.out.println(1);
     }
 
-    @Before(value = "pointCut()")
-    public void methodBefore(JoinPoint joinPoint) throws Throwable {
-        String name = joinPoint.getSignature().getName();
-        System.out.println("执行目标方法【" + name + "】的<前置通知>,入参" + Arrays.asList(joinPoint.getArgs()));
-    }
-
     @After(value = "pointCut()")
     public void methodAfter(JoinPoint joinPoint) {
         String name = joinPoint.getSignature().getName();
@@ -46,6 +40,12 @@ public class CalculateAspect {
     public void methodAfter(JoinPoint joinPoint, Object result) {
         String name = joinPoint.getSignature().getName();
         System.out.println("执行目标方法【" + name + "】的<返回通知>,入参" + Arrays.asList(joinPoint.getArgs()));
+    }
+
+    @Before(value = "pointCut()")
+    public void methodBefore(JoinPoint joinPoint) throws Throwable {
+        String name = joinPoint.getSignature().getName();
+        System.out.println("执行目标方法【" + name + "】的<前置通知>,入参" + Arrays.asList(joinPoint.getArgs()));
     }
 
     @AfterThrowing(value = "pointCut()")

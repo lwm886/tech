@@ -13,8 +13,8 @@ public class AopRunner {
         int add = bean.add(1, 5);
         System.out.println(add);
 
-        ImportCalculate bean1 = applicationContext.getBean("calculateImpl",ImportCalculate.class);
-        System.out.println(bean1.sum(11,55));
+//        ImportCalculate bean1 = applicationContext.getBean("calculateImpl",ImportCalculate.class);
+//        System.out.println(bean1.sum(11,55));
 
     }
 }

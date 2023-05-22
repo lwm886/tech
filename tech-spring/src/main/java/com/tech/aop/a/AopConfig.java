@@ -8,7 +8,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @author lw
  * @since 2023-05-17
  */
-@EnableAspectJAutoProxy(proxyTargetClass = true)
+@EnableAspectJAutoProxy //(exposeProxy = true) // (proxyTargetClass = true)
 @ComponentScan
 @Configuration
 public class AopConfig {
