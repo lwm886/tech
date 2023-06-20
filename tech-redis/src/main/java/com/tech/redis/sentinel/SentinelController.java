@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class SentinelController {
+    
+    //扩展于RedisTemplate
+    //StringRedisTemplate 默认对k v使用了String的序列化
+    //RedisTemplate 默认对k v使用了JDK的序列化
     @Autowired
     StringRedisTemplate stringRedisTemplate;
     
