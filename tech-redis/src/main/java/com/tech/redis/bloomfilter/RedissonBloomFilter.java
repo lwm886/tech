@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class RedissonBloomFilter {
     public static void main(String[] args) {
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://localhost:6379");
+        config.useSingleServer().setAddress("redis://192.168.50.134 :6379");
         //构造Redisson
         RedissonClient redissonClient = Redisson.create(config);
 
@@ -39,7 +39,7 @@ public class RedissonBloomFilter {
     //布隆过滤器防止缓存穿透,服务启动时，初始化所有key到布隆过滤器
     public void init(){
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://localhost:6379");
+        config.useSingleServer().setAddress("redis://192.168.50.134:6379");
         //构造Redisson
         RedissonClient redissonClient = Redisson.create(config);
 
