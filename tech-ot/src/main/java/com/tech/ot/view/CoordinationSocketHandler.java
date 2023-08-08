@@ -11,6 +11,15 @@ import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.locks.LockSupport;
 
 /**
+ * 客户端点击播放：
+ * 客户端与Netty服务端建立WebSocket连接，客户端发送请求播放的消息，服务端收到消息后，解析消息
+ * 如果是请求播放，那么将这个通道添加到播放队列中，并检查数据推送任务是否启动，如果没有启动启动数据推送任务。
+ * 
+ * 数据推送任务订阅MQTT,将接收到的感知数据，推送给播放队列中的各个通道，当发现播放队列为空的时候，那么取消订阅MQTT,不再进行数据推送。
+ * 
+ * 停止播放：
+ * 客户端发送停止播放的消息，服务端收到后解析消息，如果是请求停止播放，将该通道在数据播放队列移除。
+ * 
  * @author lw
  * @since 2023/7/28
  */
