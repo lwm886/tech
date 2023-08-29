@@ -25,8 +25,10 @@ import java.util.concurrent.locks.LockSupport;
  */
 public class CoordinationSocketHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
     
-    //需要播放的channel列表，也就是观察者们
+    //需要播放的channel列表，也就是观察者们 (单例，不应该放到这里。。。)
     private final Set<Channel> displays=new ConcurrentSkipListSet();
+    
+    
     
     private volatile boolean run=false;
     
@@ -35,17 +37,22 @@ public class CoordinationSocketHandler extends SimpleChannelInboundHandler<TextW
         System.out.println("与客户端建"+ctx.channel().id()+"立连接，通道开启");
         //添加到channelGroup通道组
         CoordinationChannelHandlerPool.channelGroup.add(ctx.channel());
+        CoordinationChannelHandlerPool.closes.add(ctx.channel());
+        
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("与客户端断开连接，通道关闭");
 //        从channelGroup通道组删除
+        displays.remove(ctx.channel());
         CoordinationChannelHandlerPool.channelGroup.remove(ctx.channel());
     }
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, TextWebSocketFrame textWebSocketFrame) throws Exception {
+        System.out.println("closes = "+CoordinationChannelHandlerPool.closes.size());
+
         //接收的消息
         System.out.println(String.format("收到客户端%s的数据：%s",channelHandlerContext.channel().id(),textWebSocketFrame.text()));
         if(textWebSocketFrame.text().equals("start")){
@@ -56,6 +63,11 @@ public class CoordinationSocketHandler extends SimpleChannelInboundHandler<TextW
             displays.remove(channelHandlerContext.channel());
             //关闭通道
             channelHandlerContext.channel().close();
+            
+            //测试批量关闭缓存的通道
+//            CoordinationChannelHandlerPool.closes.forEach(c->{
+//                c.close();
+//            });
         }
         //单发消息
 //        sendMessage(channelHandlerContext);
