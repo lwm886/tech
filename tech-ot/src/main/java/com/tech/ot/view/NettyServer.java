@@ -45,6 +45,8 @@ public class NettyServer {
                             //以块的方式来写的处理器
                             socketChannel.pipeline().addLast(new ChunkedWriteHandler());
                             socketChannel.pipeline().addLast(new HttpObjectAggregator(8192));
+                            //ws握手认证处理器
+                            socketChannel.pipeline().addLast(new AuthHandler());
                             socketChannel.pipeline().addLast(new WebSocketServerProtocolHandler("/ws", "WebSocket", true, 65536 * 10));
                             socketChannel.pipeline().addLast(new CoordinationSocketHandler()); //自定义消息处理类
                         }

@@ -54,6 +54,8 @@ public class CoordinationSocketHandler extends SimpleChannelInboundHandler<TextW
         }
         if(textWebSocketFrame.text().equals("stop")){
             displays.remove(channelHandlerContext.channel());
+            //关闭通道
+            channelHandlerContext.channel().close();
         }
         //单发消息
 //        sendMessage(channelHandlerContext);
