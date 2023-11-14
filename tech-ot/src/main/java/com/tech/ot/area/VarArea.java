@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 public class VarArea {
     
     private static byte[] bs=new byte[1024*1024*100]; //占用堆内存
+    
     public static void main(String[] args) throws InterruptedException {
         int i=1024*1024*10;
         int s=0;
