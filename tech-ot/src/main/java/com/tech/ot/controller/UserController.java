@@ -1,4 +1,4 @@
-package com.tech.mysql.controller;
+package com.tech.ot.controller;
 
 import com.google.common.collect.Lists;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
@@ -46,7 +46,7 @@ public class UserController {
 
     @GetMapping("tc")
     public List tc() throws InterruptedException {
-        TimeUnit.MILLISECONDS.sleep(500);
+        TimeUnit.MILLISECONDS.sleep(5000);
         System.out.println("ok");
         return Lists.newArrayList("ok");
     }
