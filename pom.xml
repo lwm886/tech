@@ -16,5 +16,6 @@
     <module>tech-redis</module>
     <module>tech-spring</module>
     <module>tech-test</module>
+    <module>tech-zookeeper</module>
   </modules>
 </project>
