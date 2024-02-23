@@ -1,0 +1,28 @@
+package com.cfg.product;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@SpringBootApplication
+public class ProductCenterApplication {
+    
+    @Value("${server.port}")
+    String port;
+    
+    @Value("${spring.application.name}")
+    String serverName;
+    
+    @GetMapping("/getInfo")
+    public String getInfo(){
+        return "serverName:"+serverName+",port:"+port;
+    }
+    
+    public static void main(String[] args) {
+        SpringApplication.run(ProductCenterApplication.class, args);
+    }
+
+}
