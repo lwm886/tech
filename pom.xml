@@ -17,5 +17,6 @@
     <module>tech-spring</module>
     <module>tech-test</module>
     <module>tech-zookeeper</module>
+	<module>tech-rabbitmq</module>
   </modules>
 </project>
