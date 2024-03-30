@@ -12,7 +12,7 @@ public class RmUtils {
     private static ConnectionFactory connectionFactory = new ConnectionFactory();
 
     static {
-        connectionFactory.setHost("192.168.50.148");
+        connectionFactory.setHost("192.168.50.151");
         connectionFactory.setPort(5672);
         connectionFactory.setUsername("guest");
         connectionFactory.setPassword("guest");
