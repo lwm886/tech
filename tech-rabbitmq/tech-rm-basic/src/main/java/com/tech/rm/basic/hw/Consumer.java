@@ -1,8 +1,8 @@
-package com.tech.rm.simple.hw;
+package com.tech.rm.basic.hw;
 
 import com.rabbitmq.client.*;
-import com.tech.rm.simple.utils.RmConstants;
-import com.tech.rm.simple.utils.RmUtils;
+import com.tech.rm.basic.utils.RmConstants;
+import com.tech.rm.basic.utils.RmUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;

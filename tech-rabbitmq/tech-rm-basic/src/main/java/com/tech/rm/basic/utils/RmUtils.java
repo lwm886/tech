@@ -1,4 +1,4 @@
-package com.tech.rm.simple.utils;
+package com.tech.rm.basic.utils;
 
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;

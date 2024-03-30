@@ -1,10 +1,10 @@
-package com.tech.rm.simple.workqueue;
+package com.tech.rm.basic.workqueue;
 
 import com.google.gson.Gson;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.tech.rm.simple.utils.RmConstants;
-import com.tech.rm.simple.utils.RmUtils;
+import com.tech.rm.basic.utils.RmConstants;
+import com.tech.rm.basic.utils.RmUtils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;

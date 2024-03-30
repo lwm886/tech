@@ -1,13 +1,13 @@
-package com.tech.rm;
+package com.tech.rm.basic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TechRmApplication {
+public class TechRmBasicApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TechRmApplication.class, args);
+        SpringApplication.run(TechRmBasicApplication.class, args);
     }
 
 }

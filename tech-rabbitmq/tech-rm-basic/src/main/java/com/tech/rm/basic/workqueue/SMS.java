@@ -1,4 +1,4 @@
-package com.tech.rm.simple.workqueue;
+package com.tech.rm.basic.workqueue;
 
 /**
  * @author lw

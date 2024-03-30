@@ -1,8 +1,8 @@
-package com.tech.rm.simple.workqueue;
+package com.tech.rm.basic.workqueue;
 
 import com.rabbitmq.client.*;
-import com.tech.rm.simple.utils.RmConstants;
-import com.tech.rm.simple.utils.RmUtils;
+import com.tech.rm.basic.utils.RmConstants;
+import com.tech.rm.basic.utils.RmUtils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * @author lw
  * @since 2024/3/27
  */
-public class Receiver1 {
+public class Receiver3 {
     public static void main(String[] args) throws IOException {
         Connection connection = RmUtils.getConnection();
         Channel channel = connection.createChannel();
@@ -24,14 +24,13 @@ public class Receiver1 {
         channel.basicConsume(RmConstants.QUEUE_SMS,false,new DefaultConsumer(channel){
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
-     
                 try {
-                    TimeUnit.SECONDS.sleep(1);
+                    TimeUnit.MILLISECONDS.sleep(10);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
                 String msg = new String(body);
-                System.out.println("Receiver1 收到消息："+msg);
+                System.out.println("Receiver3 收到消息："+msg);
                 channel.basicAck(envelope.getDeliveryTag(),false);
             }
         });
