@@ -32,6 +32,8 @@ public class WeatherBureau {
         Channel channel = connection.createChannel();
         //开启confirm监听模式
         channel.confirmSelect();
+        
+        //发送确认监听 消息从生产者到交换机 回调监听
         channel.addConfirmListener(new ConfirmListener() {
             public void handleAck(long l, boolean b) throws IOException {
                 //第二个参数代表接收的数据是否为批量接收，一般我们用不到。
@@ -42,6 +44,8 @@ public class WeatherBureau {
                 System.out.println("消息已被Broker拒收,Tag:" + l);
             }
         });
+        
+//        转发确认监听 消息从交换机转发到队列 转发失败回调监听
         channel.addReturnListener(new ReturnCallback() {
             public void handle(Return r) {
                 System.err.println("===========================");
@@ -56,9 +60,10 @@ public class WeatherBureau {
         Iterator<Map.Entry<String, String>> iterator = area.entrySet().iterator();
         while (iterator.hasNext()){
             Map.Entry<String, String> next = iterator.next();
-//            args[交换机，路由key，额外属性，消息]
-            channel.basicPublish(RmConstants.EXCHANGE_WEATHER_TOPIC,next.getKey(),null,next.getKey().getBytes());
+//            args[交换机，路由key，交换机转发消息到队列失败（消息没有匹配的队列）回退消息给生产者，额外属性，消息]
+            channel.basicPublish(RmConstants.EXCHANGE_WEATHER_TOPIC,next.getKey(),true,null,next.getKey().getBytes());
         }
+        //此处不能关闭通道，否则无法触发监听
       /*  channel.close();
         connection.close();*/
     }
