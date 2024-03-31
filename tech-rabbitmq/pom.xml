@@ -16,6 +16,8 @@
         <module>tech-rm-basic</module>
         <module>tech-rm-spring-producer</module>
         <module>tech-rm-spring-consumer</module>
+        <module>tech-rm-boot-producer</module>
+        <module>tech-rm-boot-consumer</module>
     </modules>
 
 
