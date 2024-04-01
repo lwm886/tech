@@ -35,13 +35,18 @@
     -->
     <!--消息可靠性投递（生产端）-->
     <rabbit:queue id="test_queue_confirm" name="test_queue_confirm"></rabbit:queue>
-
     <rabbit:direct-exchange name="test_exchange_confirm">
         <rabbit:bindings>
             <rabbit:binding queue="test_queue_confirm" key="confirm"></rabbit:binding>
         </rabbit:bindings>
     </rabbit:direct-exchange>
-    
+
+    <rabbit:queue name="test_queue_ttl" id="test_queue_ttl"></rabbit:queue>
+    <rabbit:topic-exchange name="test_exchange_ttl" >
+        <rabbit:bindings>
+            <rabbit:binding pattern="ttl.#" queue="test_queue_ttl"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
     
     
 

@@ -102,4 +102,23 @@ public class ProducerTest {
 
         }
     }
+
+    /**
+     * TTL:过期时间
+     *  1 队列统一过期
+     *  2 消息单独过期
+     * 
+     * 如果设置了队列过期时间，也设置了消息的过期时间，以过期时间短的为准
+     * 队列过期后，会将队列中过期消息移除
+     * 消息过期后，只有消息在队列顶端，才会判断其是否过期（移除掉）
+     *  
+     */
+    @Test
+    public void testTtl(){
+        for (int i = 0; i < 10; i++) {
+            //发送消息
+            rabbitTemplate.convertAndSend("test_exchange_ttl","ttl.test","message ttl ..."+ i);
+
+        }
+    }
 }
