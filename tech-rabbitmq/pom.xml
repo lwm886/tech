@@ -20,6 +20,7 @@
         <module>tech-rm-boot-consumer</module>
         <module>tech-rm-spring-producer-advanced</module>
         <module>tech-rm-spring-consumer-advanced</module>
+        <module>tech-rm-boot</module>
     </modules>
 
 

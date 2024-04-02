@@ -29,11 +29,13 @@
     <bean id="topicListenerWell" class="com.baiqi.rabbitmq.listener.TopicListenerWell"/>
     <bean id="topicListenerWell2" class="com.baiqi.rabbitmq.listener.TopicListenerWell2"/>
 -->
-    <rabbit:listener-container connection-factory="connectionFactory" acknowledge="manual" prefetch="3">
+    <rabbit:listener-container connection-factory="connectionFactory" acknowledge="manual" prefetch="1">
 <!--
        <rabbit:listener ref="qosListener" queue-names="test_queue_confirm"/>
 -->
-       <rabbit:listener ref="ackListener" queue-names="test_queue_confirm"/>
+       <!--<rabbit:listener ref="ackListener" queue-names="test_queue_confirm"/>-->
+
+        <rabbit:listener ref="dlxListener" queue-names="test_queue_dlx"/>
 <!--
         <rabbit:listener ref="fanoutListener1" queue-names="spring_fanout_queue_1"/>
 -->

@@ -121,4 +121,23 @@ public class ProducerTest {
 
         }
     }
+
+    /**
+     * 测试死信消息：
+     *  1. 过期时间 给队列设置了过期时间
+     *  2. 长度限制 给队列设置了消息最大数量
+     *  3. 消息拒收 消费者拒收消息，并且不将其重回队列
+     */
+    @Test
+    public void testDlx(){
+        //消息过期
+//        rabbitTemplate.convertAndSend("test_exchange_dlx","test.dlx.ttl","ttl test ...");
+        //发送消息数量超过队列容纳的最大数量
+//        for (int i = 0; i < 100; i++) {
+//            rabbitTemplate.convertAndSend("test_exchange_dlx","test.dlx.ttl","消息数量 test ...");
+//        }
+        //在消费者端进行拒收
+        rabbitTemplate.convertAndSend("test_exchange_dlx","test.dlx.ttl","消息拒收 ...");
+    }
+    
 }
