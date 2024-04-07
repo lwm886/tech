@@ -24,7 +24,7 @@ public class LightPullConsumerAssign {
         consumer.setNamesrvAddr("192.168.50.152:9876;192.168.50.153:9876;192.168.50.154:9876");
         consumer.setAutoCommit(false);
         consumer.start();
-        //获取当前Topic的队列 2m-2s-async集群配置时，设置一个broker 4个队列，2个broker 8个队列 broker-a[0,1,2,3] broker-b[0,1,2,3]
+        //获取当前Topic的全部队列，默认一个Broker为一个Topic创建4个队列，2m-2s-async集群，总共有2个broker，8个队列 broker-a[0,1,2,3] broker-b[0,1,2,3]
         Collection<MessageQueue> queues = consumer.fetchMessageQueues("TopicTestAsync");
         List<MessageQueue> messageQueues = new ArrayList<>(queues);
         List<MessageQueue> assignList = new ArrayList<>();
