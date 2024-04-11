@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class AsyncProducerSend {
     public static void main(String[] args) throws MQClientException, RemotingException, InterruptedException, UnsupportedEncodingException {
         DefaultMQProducer producer = new DefaultMQProducer("ProducerGroupName");
-        producer.setNamesrvAddr("192.168.50.152:9876;192.168.50.153:9876;192.168.50.154:9876");
+        producer.setNamesrvAddr("192.168.50.157:9876;192.168.50.158:9876;192.168.50.159:9876");
         producer.start();
         producer.setRetryTimesWhenSendAsyncFailed(0);
         

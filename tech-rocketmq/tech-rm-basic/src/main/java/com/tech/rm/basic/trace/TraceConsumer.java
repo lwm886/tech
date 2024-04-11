@@ -1,6 +1,5 @@
-package com.tech.rm.basic.broadcast;
+package com.tech.rm.basic.trace;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -8,34 +7,28 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
-import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 
 import java.util.List;
 
 /**
  * @author lw
- * @since 2024/4/8
+ * @since 2024/4/11
  */
-@Slf4j
-public class PushConsumer {
+public class TraceConsumer {
     public static void main(String[] args) throws MQClientException {
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("broadcast-push-g1");
-        consumer.setNamesrvAddr("192.168.50.152:9876;192.168.50.155:9876;192.168.50.156:9876");
-
-        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
-        //默认集群模式 同组消费者实例均摊队列
-//        consumer.setMessageModel(MessageModel.CLUSTERING);
-        //广播模式 同组消费者实例消费的消息相同
-        consumer.setMessageModel(MessageModel.BROADCASTING);
-        consumer.subscribe("TopicTestAsync","*");
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("trace-c-g1",true);
+        consumer.setNamesrvAddr("192.168.50.157:9876;192.168.50.158:9876;192.168.50.159:9876");
+        consumer.subscribe("TraceTopicTest","*");
+        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
+        consumer.setConsumeTimestamp("20181109221800");
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
-                log.info("Receive New Message: {}",list);
+                System.out.println(list);
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
         });
         consumer.start();
-        System.out.println("Broadcast Consumer Started.");
+        System.out.println("consumer started.");
     }
 }

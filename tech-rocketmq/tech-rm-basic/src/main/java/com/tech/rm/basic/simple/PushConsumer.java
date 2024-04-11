@@ -18,7 +18,7 @@ public class PushConsumer {
     public static void main(String[] args) throws MQClientException {
         //推的形式消费消息
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("push-group11");
-        consumer.setNamesrvAddr("192.168.50.152:9876;192.168.50.153:9876;192.168.50.154:9876");
+        consumer.setNamesrvAddr("192.168.50.157:9876;192.168.50.158:9876;192.168.50.159:9876");
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         consumer.subscribe("TopicTestAsync","*");
         consumer.setConsumeTimestamp("20181109221800");
