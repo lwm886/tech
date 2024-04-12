@@ -82,7 +82,8 @@ public class SendTest {
         //发送延迟消息
 /*        SendResult sendResult = rocketMQTemplate.syncSend(topic, MessageBuilder.withPayload("request string").build(), 15000, 1);
         log.info("delay Send result : {}",sendResult);*/
-
+        
+        //批量发送消息
         List< org.springframework.messaging.Message> msgs=new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             org.springframework.messaging.Message<String> message = MessageBuilder.withPayload("Batch Msg:" + i).setHeader(RocketMQHeaders.KEYS, "key_" + i).build();
