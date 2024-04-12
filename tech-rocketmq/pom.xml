@@ -15,6 +15,7 @@
     <modules>
         <module>tech-rm-basic</module>
         <module>tech-rm-boot</module>
+        <module>tech-rm-cloud-stream</module>
         
     </modules>
 
