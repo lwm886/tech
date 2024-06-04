@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *      如果发送事务状态是UNKNOWN,则等待达到配置的检查时间，Broker会回查生产者的本地事务，此时生产者检查本地事务，向Broker返回本地事务状态：
  *          如果发送事务状态是COMMIT,则消费者能够消费这条事务消息
  *          如果发送事务状态是RollBack,则Broker将会丢弃这条事务消息，消费者不会消费到这条消息
- *          如果发送事务状态是UNKNOWN，broker会继续回查生产者，当达到配置的最大回查次数，得到的事务状态依旧是UNKNOWN状态，则Broker会丢弃这条事务消息
+ *          如果发送事务状态是UNKNOWN，达到配置的回查间隔时间broker会继续回查生产者，当达到配置的最大回查次数，得到的事务状态依旧是UNKNOWN状态，则Broker会丢弃这条事务消息
  * Rocker发送的事务消息，首先会被发送到一个临时Topic中，当事务消息状态被生产者确认后，再被Broker转发到目标Topic         
  * @author lw
  * @since 2024/4/11
