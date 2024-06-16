@@ -6,6 +6,10 @@
     <groupId>com.tech</groupId>
     <artifactId>tech-kafka</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>tech-kafka</name>
     
+    <modules>
+        <module>tech-kafka-basic</module>
+    </modules>
 </project>
