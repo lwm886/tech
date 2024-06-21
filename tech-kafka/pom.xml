@@ -11,5 +11,6 @@
     
     <modules>
         <module>tech-kafka-basic</module>
+        <module>tech-kafka-boot</module>
     </modules>
 </project>
