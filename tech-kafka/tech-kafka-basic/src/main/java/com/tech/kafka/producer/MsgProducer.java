@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutionException;
  * @since 2024/6/16
  */
 public class MsgProducer {
-    private static final String TOPIC_NAME = "topic-a";
+    private static final String TOPIC_NAME = "topic-b";
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         Properties props = new Properties();
