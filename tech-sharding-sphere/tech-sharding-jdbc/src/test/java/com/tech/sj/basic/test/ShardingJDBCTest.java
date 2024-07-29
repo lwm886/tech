@@ -1,6 +1,8 @@
 package com.tech.sj.basic.test;
 
+import com.tech.sj.basic.entity.Course;
 import com.tech.sj.basic.entity.SjCourse;
+import com.tech.sj.basic.mapper.CourseMapper;
 import com.tech.sj.basic.mapper.SjCourseMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,16 +20,16 @@ import javax.annotation.Resource;
 public class ShardingJDBCTest {
     
     @Resource
-    SjCourseMapper courseMapper;
+    CourseMapper courseMapper;
     
     @Test
     public void addCourse(){
         for (int i = 0; i < 10; i++) {
-            SjCourse c = new SjCourse();
-            c.setId(Long.valueOf(i));
-            c.setName("shardingSphere");
+            Course c = new Course();
+            c.setCid(Long.valueOf(i));
+            c.setCname("shardingSphere");
             c.setUserId(Long.valueOf(1000+Long.valueOf(i)));
-            c.setStatus("1");
+            c.setCstatus("1");
             courseMapper.insert(c);
         }
     }
