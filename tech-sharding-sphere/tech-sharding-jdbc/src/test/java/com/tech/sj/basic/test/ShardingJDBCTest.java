@@ -5,6 +5,7 @@ import com.tech.sj.basic.entity.Course;
 import com.tech.sj.basic.entity.SjCourse;
 import com.tech.sj.basic.mapper.CourseMapper;
 import com.tech.sj.basic.mapper.SjCourseMapper;
+import org.apache.shardingsphere.api.hint.HintManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -65,6 +66,16 @@ public class ShardingJDBCTest {
         wrapper.between("cid",1024781933592186881L,1024781933634129921L);
         wrapper.eq("user_id",1001L);
         List<Course> courses = courseMapper.selectList(wrapper);
+        courses.forEach(System.out::println);
+    }
+    
+    //hint 强制路由分片策略 只查询特定库的特定表
+    @Test
+    public void queryCourseHint(){
+        HintManager hintManager = HintManager.getInstance();
+        hintManager.addDatabaseShardingValue("course",1); //只查询m1库
+        hintManager.addTableShardingValue("course",2); //只查询表course_2
+        List<Course> courses = courseMapper.selectList(null);
         courses.forEach(System.out::println);
     }
 }
