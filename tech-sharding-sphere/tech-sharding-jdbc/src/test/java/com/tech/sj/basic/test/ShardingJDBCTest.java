@@ -3,8 +3,10 @@ package com.tech.sj.basic.test;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tech.sj.basic.entity.Course;
 import com.tech.sj.basic.entity.SjCourse;
+import com.tech.sj.basic.entity.TDict;
 import com.tech.sj.basic.mapper.CourseMapper;
 import com.tech.sj.basic.mapper.SjCourseMapper;
+import com.tech.sj.basic.mapper.TDictMapper;
 import org.apache.shardingsphere.api.hint.HintManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +27,9 @@ public class ShardingJDBCTest {
     
     @Resource
     CourseMapper courseMapper;
+    
+    @Resource
+    TDictMapper dictMapper;
     
     @Test
     public void addCourse(){
@@ -78,4 +83,17 @@ public class ShardingJDBCTest {
         List<Course> courses = courseMapper.selectList(null);
         courses.forEach(System.out::println);
     }
+    
+    @Test
+    public void addDict(){
+        TDict d1 = new TDict();
+        d1.setUstatus("1");
+        d1.setUvalue("正常");
+        dictMapper.insert(d1);
+        TDict d2 = new TDict();
+        d2.setUstatus("0");
+        d2.setUvalue("不正常");
+        dictMapper.insert(d2);
+    }
+    
 }
